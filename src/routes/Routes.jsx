@@ -6,6 +6,7 @@ import MainLayout from "../layouts/MainLayout";
 import CategoryNews from "../pages/CategoryNews";
 import AuthLayout from "../layouts/AuthLayout";
 import Login from "../components/Login/Login";
+import Register from "../components/Register/Register";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -32,7 +33,7 @@ const router = createBrowserRouter([
       },
       {
         path:"/auth/register",
-        element:<Login></Login>
+        element:<Register></Register>
       }
     ]
 
