@@ -14,7 +14,7 @@ const NewsCard = ({ singleNews }) => {
     } =singleNews;
 
     return (
-        <div className=" p-4 bg-white rounded-lg shadow-md">
+        <div className=" p-4 bg-white rounded-lg shadow-md mb-4">
         {/* Author Information */}
         <div className="flex items-center mb-4">
           <img
