@@ -1,10 +1,14 @@
-import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
-import { CgPassword } from "react-icons/cg";
+//import { CgPassword } from "react-icons/cg";
 
 const Login = () => {
     const {userLogin,setUser}=useContext(AuthContext);
+    const [error,setError]=useState({});
+    //sending back user to the place/element,when he clicked it and login form shown
+    const location=useLocation();
+    const navigate=useNavigate();
     const handleLogin=e=>{
         e.preventDefault();
         const form=e.target;
@@ -15,9 +19,11 @@ const Login = () => {
             const user=result.user;
             setUser(user);
             console.log(user);
+            //sending user to the same place after login
+            navigate(location?.state? location.state:"/" )
         })
-        .then((error)=>{
-            alert(error.code)
+        .catch((err)=>{
+          setError({...error,login:err.code})
         })
     }
     return (
@@ -36,6 +42,11 @@ const Login = () => {
                             <span className="label-text">Password</span>
                         </label>
                         <input name="password" type="password" placeholder="password" className="input input-bordered" required />
+                        {error.login &&(
+                             <label className="label text-sm text-red-600 ">
+                             {   error.login }
+                            </label>
+                        )}
                         <label className="label">
                             <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                         </label>
