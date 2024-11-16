@@ -1,8 +1,6 @@
 import React from 'react';
 import { AiFillStar } from 'react-icons/ai';
-import { FaEye } from 'react-icons/fa';
-import { FiShare2 } from 'react-icons/fi';
-
+import { FaRegEye, FaShareAlt } from 'react-icons/fa';
 const NewsCard = ({ singleNews }) => {
     const {
         author,
@@ -14,37 +12,61 @@ const NewsCard = ({ singleNews }) => {
     } =singleNews;
 
     return (
-        <div className="card w-full bg-base-100 mb-4">
-            <div className="flex justify-between items-center p-4">
-                <div className="flex items-center space-x-2">
-                    <img src={author.img} alt="Author" className="w-10 h-10 rounded-full" />
-                    <div>
-                        <h2 className="font-semibold">{author.name}</h2>
-                        <p className="text-sm text-gray-500">{new Date(author.published_date).toLocaleDateString()}</p>
-                    </div>
-                </div>
-                <FiShare2 className="text-gray-500 cursor-pointer" />
-            </div>
+        <div className=" p-4 bg-white rounded-lg shadow-md">
+        {/* Author Information */}
+        <div className="flex items-center mb-4">
+          <img
+            src={author.img}
+            alt={author.name}
+            className="w-10 h-10 rounded-full mr-3"
+          />
           <div>
-          <img src={thumbnail_url} alt="Thumbnail" className="w-full h-72 rounded-lg object-cover" />
+            <p className="font-semibold">{author.name}</p>
+            <p className="text-sm text-gray-500">{author.published_date}</p>
           </div>
-            <div className="card-body">
-                <h2 className="card-title text-lg font-semibold">{title}</h2>
-                <p className="text-sm text-gray-600 mb-3">{details.slice(0, 100)}... <span className="text-blue-500 cursor-pointer">Read More</span></p>
-                <div className="flex justify-between items-center">
-                    <div className="flex items-center space-x-1 text-yellow-500">
-                        {[...Array(5)].map((_, i) => (
-                            <AiFillStar key={i} className={i < Math.floor(rating.number) ? 'text-yellow-500' : 'text-gray-300'} />
-                        ))}
-                        <span className="ml-2 text-gray-700 font-semibold">{rating.number}</span>
-                    </div>
-                    <div className="flex items-center space-x-1 text-gray-600">
-                        <FaEye />
-                        <span>{total_view}</span>
-                    </div>
-                </div>
-            </div>
+          <div className="ml-auto">
+            <FaShareAlt className="text-gray-600" />
+          </div>
         </div>
+  
+        {/* Title */}
+        <h2 className="text-xl font-semibold mb-2">{title}</h2>
+  
+        {/* Thumbnail Image */}
+        <img
+          src={thumbnail_url}
+          alt="Thumbnail"
+          className="w-full h-72  object-cover rounded-lg mb-4"
+        />
+  
+        {/* Details */}
+        <p className="text-gray-700 text-sm mb-4">
+          {details.slice(0, 150)}...{" "}
+          <span className="text-primary">Read More</span>
+        </p>
+  
+        {/* Ratings and Views */}
+        <div className="flex items-center justify-between text-gray-600 text-sm">
+          {/* Rating */}
+          <div className="flex items-center">
+            {[...Array(5)].map((_, i) => (
+              <AiFillStar
+                key={i}
+                className={`text-yellow-500 ${
+                  i < Math.round(rating.number) ? "" : "opacity-50"
+                }`}
+              />
+            ))}
+            <span className="ml-2 font-semibold">{rating.number}</span>
+          </div>
+  
+          {/* Views */}
+          <div className="flex items-center">
+            <FaRegEye className="mr-1" />
+            <span>{total_view}</span>
+          </div>
+        </div>
+      </div>
     );
 };
 
