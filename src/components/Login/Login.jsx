@@ -18,7 +18,6 @@ const Login = () => {
         .then(result=>{
             const user=result.user;
             setUser(user);
-            console.log(user);
             //sending user to the same place after login
             navigate(location?.state? location.state:"/" )
         })

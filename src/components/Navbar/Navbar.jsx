@@ -15,7 +15,13 @@ const Navbar = () => {
             </div>
             <div className="flex gap-2 items-center">
               <div className="">
-              <FaUserCircle className='text-4xl' />
+                {
+                  user && user?.email? <div> 
+                    <img className='w-10 rounded-full' src={user?.photoURL} alt="" srcset="" />
+                    <p>{user?.displayName}</p>
+                    </div>
+                   : <FaUserCircle className='text-4xl' />
+                }
               </div>
               {
                 user && user?.email?(
